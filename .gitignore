@@ -1,0 +1,10 @@
+venv
+*.db
+*.pyc
+test.py
+*.sqlite3
+db/migrations
+__pycache__
+.pytest_cache
+.vscode
+run_dev.sh

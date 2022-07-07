@@ -1,0 +1,67 @@
+:root {
+  --bg-primary: #fff;
+  --bg-secondary: #f3f2f1;
+  --bg-tertiary: #fff;
+  --bg-hover: #edebe9;
+  --bg-hover-secondary: #fafafa;
+  --bg-hover-tertiary: #edebe9;
+  --bg-active: #ecf6fd;
+  --bg-active-secondary: #ededed;
+  --bg-active-tertiary: #ecf6fd;
+  --bg-separator: #edebe9;
+  --bg-border: #edebe9;
+  --bg-scrollbar: #A19F9D;
+  --bg-brand: #2564cf;
+  --bg-brand-hover: #215aba;
+  --bg-brand-hover-secondary: #8c93a5;
+  --bg-brand-secondary: #ecf6fd;
+  --bg-brand-disable: #EDEBE9;
+  --font-color-primary: #323130;
+  --font-color-secondary: #797775;
+  --font-color-tertiary: #797775;
+  --font-color-warning: #a80000;
+  --font-color-brand: #2564cf;
+  --font-color-disable: #A19F9D;
+  --bg-ms-planner: #31752f;
+  --bg-ms-one-note: #7719aa;
+  --bg-ms-excel: #107c41;
+  --bg-ms-word: #185abd;
+  --bg-ms-power-point: #c43e1c;
+  --bg-ms-teams: #6355a8;
+}
+
+
+.button.primary {
+  padding: 9px 12px;
+  border: none;
+  width: auto;
+  height: auto;
+  transition: background-color 100ms;
+  border-radius: 2px;
+  color: white;
+  font-weight: bold;
+  background: #2564cf;
+  background: var(--bg-brand);
+  border: none;
+  cursor: pointer;
+}
+
+
+body {
+  font-size: 16px;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f3f2f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a19f9d;
+  border-radius: 5px;
+}
