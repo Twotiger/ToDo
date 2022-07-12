@@ -1,25 +1,32 @@
 <script setup>
-  import {
-    useRouter
-  } from 'vue-router'
-  import SvgIcon from "@/components/SvgIcon.vue"
+import { useRouter } from "vue-router";
+import { createVNode, render, ref, inject } from "vue";
+import SvgIcon from "@/components/SvgIcon.vue";
+import showMenu from "@/components/right_click/index.js";
 
+const props = defineProps({
+  data: Object,
+});
 
-  const props = defineProps({
-    data: Object,
+let router = useRouter();
+
+const jump = (listID) => {
+  router.push({
+    path: `/task/${listID}`,
   });
+};
 
-  let router = useRouter()
+const getTaskGroup = inject("getTaskGroup");
 
-  const jump = (listID) => {
-    router.push({
-      path: `/task/${listID}`
-    })
-  }
+const contextmenu = (e) => {
+  showMenu("RightClickList", e, props.data.id, getTaskGroup);
+  e.preventDefault();
+};
 </script>
 
+
 <template>
-  <div class="task-list" @click="jump(data.id)">
+  <div class="task-list" @click="jump(data.id)" @contextmenu="contextmenu">
     <svg-icon name="task_list" />
     <span class="text">{{ data.name }}</span>
     <span class="count">{{ data.count }}</span>
@@ -27,27 +34,27 @@
 </template>
 
 <style lang="scss" scoped>
-  .task-list {
-    cursor: pointer;
-    padding: 0 12px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    color: #323100;
-    font-size: 14px;
+.task-list {
+  cursor: pointer;
+  padding: 0 12px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  color: #323100;
+  font-size: 14px;
 
-    .text {
-      flex: 1;
-      margin-left: 10px;
-    }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-    }
+  .text {
+    flex: 1;
+    margin-left: 10px;
   }
 
-  .task-list:hover {
-    background: #fff;
+  .icon {
+    width: 20px;
+    height: 20px;
   }
+}
+
+.task-list:hover {
+  background: #fff;
+}
 </style>

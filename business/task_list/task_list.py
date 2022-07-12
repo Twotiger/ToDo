@@ -17,6 +17,7 @@ class BaseTaskList(Model):
     __slots__ = ("name", "task_type")
 
 
+
 class TaskList(BaseTaskList):
 
     __slots__ = ("name", "id", "task_type", "user_id",
@@ -83,6 +84,14 @@ class TaskList(BaseTaskList):
         self.decrement_task_count(task)
         TaskDB.objects.filter(id=task.id, user_id=user.id).delete()
 
+    def delete(self): 
+        """删除
+        """
+        user = UserFactory.get()
+        TaskDB.objects.filter(task_list_id=self.id, user_id=user.id).delete()
+        TaskListDB.objects.filter(user_id=user.id, parent_id=self.parent_id ,index__gt=self.index).update(index=F("index") - 1)
+        TaskListDB.objects.filter(id=self.id,user_id=user.id).delete()
+        return True
 
 class TaskGroup(BaseTaskList):
     __slots__ = ("name", "id", "task_type", "index", "user_id", "parent_id")
@@ -90,3 +99,23 @@ class TaskGroup(BaseTaskList):
     def __init__(self, db_model=None):
         super().__init__(db_model)
         self.task_type = "group"
+
+    def get_last_index(self):
+        """得到parent_id为0的最后的index值
+        """
+        user = UserFactory.get()
+        model = TaskListDB.objects.filter(user_id=user.id, parent_id=0).order_by("-index").first()
+        if model:
+            return model.index
+        else:
+            return 0
+
+    def delete(self):
+        """删除组,将组里面的列表都释放出来
+        """
+        user = UserFactory.get()
+        last_index = self.get_last_index()
+        # 移动里面的List到外面
+        TaskListDB.objects.filter(user_id=user.id, parent_id=self.id).update(index=F("index") + last_index, parent_id=0)
+        # 删除group
+        TaskListDB.objects.filter(id=self.id, user_id=user.id ).delete()

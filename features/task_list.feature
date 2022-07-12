@@ -924,3 +924,246 @@ Feature: 任务列表
       }
       """
     When 随机测试任务列表
+
+  @task_list @delete_task_list1
+  Scenario: 删除任务列表
+    Given 'Jim'登录网站
+    When 添加任务组
+      """
+      {
+          "name": "学习"
+      }
+      """
+    Then 得到成功提示
+    When 添加任务组
+      """
+      {
+          "name": "娱乐"
+      }
+      """
+    Then 得到成功提示
+    When 添加任务列表
+      """
+      {
+          "name": "打游戏"
+      }
+      """
+    When 添加任务列表
+      """
+      {
+          "name": "看电影"
+      }
+      """
+    When 添加任务列表
+      """
+      {
+          "name": "work"
+      }
+      """
+    When 删除任务列表"打游戏"
+    Then 得到成功提示
+    Then 查询任务列表
+      """
+      [
+          {
+              "name": "学习", "task_type": "group"
+          },
+          {
+              "name": "娱乐", "task_type": "group"
+          },
+          {
+              "name": "看电影", "task_type": "list"
+          },
+          {
+              "name": "work", "task_type": "list"
+          }
+      ]
+      """
+
+  @task_list @delete_task_list2
+  Scenario: 删除组里面的任务列表
+    Given 'Jim'登录网站
+    When 添加任务组
+      """
+      {
+          "name": "学习"
+      }
+      """
+    Then 得到成功提示
+    When 添加任务组
+      """
+      {
+          "name": "娱乐"
+      }
+      """
+    Then 得到成功提示
+    When 添加任务列表
+      """
+      {
+          "name": "打游戏"
+      }
+      """
+    When 添加任务列表
+      """
+      {
+          "name": "看电影"
+      }
+      """
+    When 添加任务列表
+      """
+      {
+          "name": "work"
+      }
+      """
+    When 移动任务列表"打游戏"到"娱乐"的"里面"
+    Then 得到成功提示
+    When 移动任务列表"看电影"到"打游戏"的"下面"
+    Then 得到成功提示
+    When 移动任务列表"work"到"看电影"的"下面"
+    Then 得到成功提示
+    Then 查询任务列表
+      """
+      [
+          {
+              "name": "学习", "task_type": "group"
+          },
+          {
+              "name": "娱乐", "task_type": "group", "children": [
+              {
+                  "name": "打游戏", "task_type": "list"
+              },
+            {
+                "name": "看电影", "task_type": "list"
+            },
+            {
+                "name": "work", "task_type": "list"
+            }
+              ]
+          }
+      
+      ]
+      """
+    When 删除任务列表"看电影"
+    Then 得到成功提示
+    Then 查询任务列表
+      """
+      [
+          {
+              "name": "学习", "task_type": "group"
+          },
+          {
+              "name": "娱乐", "task_type": "group", "children": [
+              {
+                  "name": "打游戏", "task_type": "list"
+              },
+            {
+                "name": "work", "task_type": "list"
+            }
+              ]
+          }
+      
+      ]
+      """
+
+
+
+  @task_list @delete_task_list3
+  Scenario: 删除组
+    Given 'Jim'登录网站
+    When 添加任务组
+      """
+      {
+          "name": "学习"
+      }
+      """
+    Then 得到成功提示
+    When 添加任务组
+      """
+      {
+          "name": "娱乐"
+      }
+      """
+    Then 得到成功提示
+    When 添加任务列表
+      """
+      {
+          "name": "打游戏"
+      }
+      """
+    When 添加任务列表
+      """
+      {
+          "name": "看电影"
+      }
+      """
+    When 添加任务列表
+      """
+      {
+          "name": "work"
+      }
+      """
+    When 移动任务列表"打游戏"到"娱乐"的"里面"
+    Then 得到成功提示
+    When 移动任务列表"看电影"到"打游戏"的"下面"
+    Then 得到成功提示
+    When 移动任务列表"work"到"看电影"的"下面"
+    Then 得到成功提示
+    Then 查询任务列表
+      """
+      [
+          {
+              "name": "学习", "task_type": "group"
+          },
+          {
+              "name": "娱乐", "task_type": "group", "children": [
+              {
+                  "name": "打游戏", "task_type": "list"
+              },
+            {
+                "name": "看电影", "task_type": "list"
+            },
+            {
+                "name": "work", "task_type": "list"
+            }
+              ]
+          }
+      
+      ]
+      """
+    When 删除任务列表"看电影"
+    Then 得到成功提示
+    Then 查询任务列表
+      """
+      [
+          {
+              "name": "学习", "task_type": "group"
+          },
+          {
+              "name": "娱乐", "task_type": "group", "children": [
+              {
+                  "name": "打游戏", "task_type": "list"
+              },
+              {
+                "name": "work", "task_type": "list"
+              }
+              ]
+          }
+      
+      ]
+      """
+
+    When 删除任务列表"娱乐"
+    Then 查询任务列表
+      """
+      [
+        {
+            "name": "学习", "task_type": "group"
+        },
+        {
+            "name": "打游戏", "task_type": "list"
+        },
+        {
+        "name": "work", "task_type": "list"
+        }
+      ]
+      """

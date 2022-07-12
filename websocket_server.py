@@ -71,7 +71,6 @@ def notice(user_id, task_name):
         {"user_id": user_id, "type": "notification", "task_name": task_name})))
 
 
-
 async def add_notice(websocket):
     """
     接受web端传递过来的消息,验证后添加任务

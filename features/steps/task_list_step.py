@@ -65,6 +65,19 @@ def step_impl(context, from_task_name, to_task_name, position):
     context.response = response
 
 
+@when('删除任务列表"{task_list_name}"')
+def step_impl(context, task_list_name):
+    from db.models import TaskList
+
+    task_list_model = TaskList.objects.filter(name=task_list_name).first()
+    if not task_list_model:
+        raise ValueError("错误的task_list_name")
+    
+    response = context.client.delete(
+            "/api/task_list/task_list", {"id": task_list_model.id})
+    context.response = response
+
+
 @when("随机测试任务列表")
 def step_impl(context):
     from db.models import TaskList

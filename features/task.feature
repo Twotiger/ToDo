@@ -360,6 +360,7 @@ Feature: Task
       
       }
       """
+
   @task @task_suggest
   Scenario: 用户可以查询建议
     Given 'Jim'登录网站
@@ -402,17 +403,17 @@ Feature: Task
       }
       """
     Then 查询每日建议
-    """
-    [
-      {
-        "name": "明天晚上看电影"
-
-      },
-      {
-        "name": "明天晚上有约会"
-      }
-    ]
-    """
+      """
+      [
+        {
+          "name": "明天晚上看电影"
+      
+        },
+        {
+          "name": "明天晚上有约会"
+        }
+      ]
+      """
 
   @task @delete_task1
   Scenario: 用户可以删除Task
@@ -461,37 +462,37 @@ Feature: Task
       }
       """
     Then 查询任务列表详情
-    """
-    {
-      "data": [],
-      "task_count": {
-        "important": 1,
-        "my_day": 1,
-        "task": 2
+      """
+      {
+        "data": [],
+        "task_count": {
+          "important": 1,
+          "my_day": 1,
+          "task": 2
+        }
       }
-    }
-    """
+      """
     When 删除任务"今天晚上有约会"
     Then 查询任务列表详情
-    """
-    {
-      "data": [],
-      "task_count": {
-        "important": 1,
-        "my_day": 0,
-        "task": 1
+      """
+      {
+        "data": [],
+        "task_count": {
+          "important": 1,
+          "my_day": 0,
+          "task": 1
+        }
       }
-    }
-    """
+      """
     When 删除任务"明天晚上有约会"
     Then 查询任务列表详情
-    """
-    {
-      "data": [],
-      "task_count": {
-        "important": 0,
-        "my_day": 0,
-        "task": 0
+      """
+      {
+        "data": [],
+        "task_count": {
+          "important": 0,
+          "my_day": 0,
+          "task": 0
+        }
       }
-    }
-    """
+      """

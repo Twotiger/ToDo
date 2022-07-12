@@ -7,6 +7,7 @@
   <div class="app-todo">
     <router-view></router-view>
   </div>
+  <div id="menu"></div>
 </template>
 
 <style lang="scss">

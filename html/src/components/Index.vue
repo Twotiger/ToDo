@@ -5,6 +5,7 @@ import {
   reactive,
   ref,
   onMounted,
+  provide,
   computed
 } from "vue";
 import {
@@ -68,6 +69,8 @@ const getTaskGroup = async () => {
   taskCount.important = data["task_count"]["important"];
   taskCount.task = data["task_count"]["task"];
 };
+
+provide('getTaskGroup', getTaskGroup)
 
 const toggleMenu = () => {
   showMenu.value = !showMenu.value;
@@ -224,7 +227,7 @@ const openGroup = reactive([])
 </script>
 
 <template>
-  <div class="todo">
+  <div class="todo" id="todo">
     <div class="head">
       <div class="head-text">
         <span>To Do</span>
