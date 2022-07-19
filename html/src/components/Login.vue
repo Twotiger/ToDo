@@ -1,5 +1,6 @@
 <template>
   <div class="loginPage">
+    <!-- <svg-icon name="todo_list"></svg-icon> -->
     <div class="login">
       <div class="loginForm">
         <div class="title">登录你的账户</div>
@@ -9,18 +10,29 @@
         </div>
         <div class="input">
           <div class="label">密码</div>
-          <input show-password v-model="form.password" @keyup.enter.native="submit" />
+          <input
+            type="password"
+            v-model="form.password"
+            @keyup.enter.native="submit"
+          />
         </div>
 
         <div class="input" v-if="showCode">
           <div class="label">验证码</div>
           <div class="code-box">
             <input v-model="form.code" placeholder="" class="code" />
-            <img class="img" :src="base64Img" @click="changeCode" title="验证码" />
+            <img
+              class="img"
+              :src="base64Img"
+              @click="changeCode"
+              title="验证码"
+            />
           </div>
         </div>
         <div class="input submit">
-          <button type="primary" @click="submit" style="width: 100%">登录</button>
+          <button type="primary" @click="submit" style="width: 100%">
+            登录
+          </button>
         </div>
       </div>
     </div>
@@ -29,7 +41,8 @@
 
 <script>
 import accountApi from "@/api/account";
-import User from "@/domain/user"
+import User from "@/domain/user";
+import SvgIcon from "@/components/SvgIcon.vue";
 
 export default {
   data() {
@@ -61,12 +74,11 @@ export default {
           return;
         }
         let data = await accountApi.login(this.form);
-        let user = new User()
+        let user = new User();
         user.setToken(data.token);
         // await this.getUserInfo();
-        this.$message.success("登陆成功")
+        this.$message.success("登陆成功");
         window.location.href = "/";
-
       } catch (err) {
         this.$message.error(err.errMsg);
         // this.showVerificationCode();
@@ -74,6 +86,7 @@ export default {
     },
     async getUserInfo() {
       let data = await accountApi.userInfo();
+      let user = new User();
       user.setUserInfo(data.data);
       window.location.href = "/";
     },
@@ -100,6 +113,8 @@ export default {
   },
   mounted() {
     // this.beforeLogin();
+    let user = new User();
+    user.logout()
   },
 };
 </script>
@@ -111,7 +126,10 @@ body {
 
 .loginPage {
   height: 100%;
-  background-image: url("../assets/y-so-serious-white.png");
+  /* background-image: url("../assets/y-so-serious-white.png"); */
+  background-repeat: no-repeat;
+  background-position:50% 50% ;
+  background-image: url("../assets/todo_list_bg.svg");
 }
 
 .login {
@@ -184,7 +202,7 @@ input {
   line-height: 40px;
   outline: none;
   padding: 0 15px;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
 }
 
@@ -202,7 +220,7 @@ button {
   box-sizing: border-box;
   outline: none;
   margin: 0;
-  transition: .1s;
+  transition: 0.1s;
   font-weight: 500;
   -moz-user-select: none;
   -webkit-user-select: none;

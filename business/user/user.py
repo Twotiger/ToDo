@@ -8,10 +8,24 @@ from django.db.models import F
 
 class User:
 
-    __slots__ = ('id',)
+    __slots__ = ('id', '_db')
 
     def __init__(self, id=None):
         self.id = id
+
+    @property
+    def username(self):
+        return self.db.username
+
+    @property
+    def email(self):
+        return self.db.email
+
+    @property
+    def db(self):
+        if not hasattr(self, "_db"):
+            self._db = Account.objects.get(id=self.id)
+        return self._db
 
     @property
     def task_list_factory(self):

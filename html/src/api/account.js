@@ -8,5 +8,9 @@ export default {
 
     getCode(){
         return request.get("/api/verification_code")
+    },
+
+    getAccount() {
+        return request.get('/api/account/account')
     }
 }

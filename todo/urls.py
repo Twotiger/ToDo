@@ -21,11 +21,13 @@ from apps.task_list.task_list import TaskList
 from apps.task_list.task_lists import TaskLists
 from apps.task.task import Task
 from apps.task.tasks import Tasks
+from account.account import Account
 # from apps.stream.views import stream, send
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/login', login),
+    path("api/account/account", Account.as_view()),
     path('api/task_list/task_list',TaskList.as_view()),
     path('api/task_list/task_lists',TaskLists.as_view()),
     path('api/task/task',Task.as_view()),
