@@ -62,12 +62,12 @@ const myday = () => {
       return "今天"
     } else if (tomorrow.year() === newDate.year() &&
       tomorrow.month() === newDate.month() &&
-      tomorrow.date() === newDate.date() + 1
+      tomorrow.date() === newDate.date()
     ) {
       return "明天"
     } else if (afterTomorrow.year() === newDate.year() &&
       afterTomorrow.month() === newDate.month() &&
-      afterTomorrow.date() === newDate.date() + 1
+      afterTomorrow.date() === newDate.date()
     ) {
       return "后天"
     } else {

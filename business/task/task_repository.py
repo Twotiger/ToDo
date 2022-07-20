@@ -12,6 +12,7 @@ from event.task_event import TaskEvent
 class TaskRepository(Service):
 
     def add(self, model: Task):
+
         m = TaskDB(name=model.name,
                    deadline=model.deadline,
                    notice=model.notice,

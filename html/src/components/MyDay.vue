@@ -227,7 +227,7 @@
 
   // 如果更新repeat的时候deadline没有数据，需要添加数据
   const updateRepeat = () => {
-    if (repeat.intervalType && deadline.value.value === "") {
+    if (repeat.intervalType && deadline.value === "") {
       let today = new Date();
       today = new Date(
         today.getFullYear(),
@@ -235,10 +235,8 @@
         today.getDate(),
         18
       );
-      deadline.value = {
-        str: "今天",
-        value: today
-      };
+      deadline.str = "今天"
+      deadline.value = today
     }
   }
 

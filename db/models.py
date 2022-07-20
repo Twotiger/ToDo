@@ -34,6 +34,8 @@ class TaskList(models.Model):
 
 DEFAULT_DATE = datetime.datetime(
     1, 1, 1, 0, 0, 0, tzinfo=datetime.timezone.utc)
+DEFAULT_REPEAT = {"interval": 1,
+                  "intervalType": "", "type": "", "weekdays": []}
 
 
 class Task(models.Model):

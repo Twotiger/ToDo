@@ -1,7 +1,10 @@
+import json
+from datetime import datetime
 from typing import List, Union
 from utils.business_model import Service
 from .task import Task
-from db.models import DEFAULT_DATE
+from db.models import DEFAULT_DATE, DEFAULT_REPEAT
+
 
 
 class TaskFactory(Service):
@@ -20,12 +23,16 @@ class TaskFactory(Service):
         if data["repeat"]:
             task.repeat = data["repeat"]
         else:
-            task.repeat = ''
+            task.repeat = DEFAULT_REPEAT
 
         if data["notice"]:
             task.notice = data["notice"]
         else:
             task.notice = DEFAULT_DATE
+
+        # 对重复任务，添加deadline
+        if task.repeat['intervalType'] and task.deadline == DEFAULT_DATE:
+            task.deadline = datetime.now()
 
         task.is_my_day = data.get("is_my_day", False)
         task.is_important = data.get("is_important", False)

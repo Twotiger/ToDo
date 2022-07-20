@@ -36,9 +36,7 @@ job_defaults = {
 
 scheduler = AsyncIOScheduler()
 
-# scheduler.configure(jobstores=jobstores, executors=executors,
-#                     job_defaults=job_defaults, timezone=utc)
-scheduler.configure(executors=executors,
+scheduler.configure(jobstores=jobstores, executors=executors,
                     job_defaults=job_defaults, timezone=utc)
 
 scheduler.start()
@@ -105,10 +103,6 @@ def get_kwargs(interval_type, json_data, id='id'):
     """
     date = datetime.datetime.utcfromtimestamp(json_data["notice"])
     res = {}
-
-    # interval = 1
-    # if 'repeat' in json_data:
-    # interval = json_data["repeat"]['interval']
 
     if interval_type == '':
         res = dict(trigger='date', run_date=date)

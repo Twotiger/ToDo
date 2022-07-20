@@ -9,7 +9,6 @@ REPEAT = [Daliy, WeekDays, Weekly, Monthly, Yearly]
 
 
 def get_next_deadline(now: datetime, repeat: dict) -> datetime:
-
     interval_type = repeat["intervalType"]
 
     if interval_type == Daliy:
