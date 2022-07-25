@@ -201,11 +201,24 @@ const searchTasks = async (e) => {
 
 // 拖动结束
 
-onMounted(getTaskGroup);
+const adaption = () => {
+  // 如果屏幕太小,就默认隐藏侧边栏导航
+  if (window.innerWidth < 1000) {
+    showMenu.value = false
+  } else {
+    showMenu.value = true
+  }
+}
+
+onMounted(() => {
+  adaption()
+  getTaskGroup()
+
+});
 
 const openGroup = reactive([]);
 
-const showAccount = ref(false);
+const showAccount = ref(false); // 显示用户信息
 </script>
 
 <template>
