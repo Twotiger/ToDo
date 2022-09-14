@@ -9,8 +9,6 @@ import clickOutside from "@/utils/clickoutside";
 import moment from 'moment'
 import 'moment/dist/locale/zh-cn'
 import './app.css'
-// moment.locale('zh-cn')
-
 
 const app = createApp(App)
 

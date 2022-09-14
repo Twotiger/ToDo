@@ -33,6 +33,27 @@ class TaskList(BaseTaskList):
         # task list 自增
         self.increment_task_count(task)
 
+    def add_to_my_day(self, task):
+        """将已有的task添加到我的一天"""
+        task.add_my_day()
+        user = UserFactory.get()
+        user.increment_my_day_count()
+
+    def delete_my_day(self, task):
+        task.delete_my_day()
+        user = UserFactory.get()
+        user.decrement_my_day_count()
+
+    def add_important(self, task) :
+        task.add_important()
+        user = UserFactory.get()
+        user.increment_important_count()
+
+    def delete_important(self, task) :
+        task.delete_important()
+        user = UserFactory.get()
+        user.decrement_important_count()
+
     def increment_task_count(self, task: Task):
         user = UserFactory.get()
         if task.is_my_day:

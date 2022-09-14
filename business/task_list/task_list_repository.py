@@ -35,7 +35,7 @@ class TaskListRepository(Service):
                 data.append(TaskGroup(model))
         return data
 
-    def get_by_id(self, task_list_id: int):
+    def get_by_id(self, task_list_id: int=0):
         if task_list_id == 0:
             task_list = TaskList()
             task_list.id = 0
@@ -49,3 +49,9 @@ class TaskListRepository(Service):
                 return TaskList(model)
             else:
                 return TaskGroup(model)
+
+    def get_default(self):
+        """默认任务,返回id为0的task list
+        用于修改我的一天和重要两个属性
+        """
+        return self.get_by_id(0)

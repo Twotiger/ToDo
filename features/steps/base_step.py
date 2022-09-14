@@ -24,5 +24,5 @@ def step_impl(context, err_msg):
 def step_impl(context):
     response_data = context.response
     if response_data.status_code >= 400:
-        print("response_data=", response_data.json())
+        print("response_data=", response_data)
     test.assertLess(response_data.status_code, 400)

@@ -61,6 +61,5 @@ class TaskRepository(Service):
     def filter_suggest(self):
         """建议
         """
-
         tasks = TaskDB.objects.filter(user_id=self.parent.id, status=False, is_my_day=False).order_by("-id")
         return [Task(i) for i in tasks]

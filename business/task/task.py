@@ -69,9 +69,6 @@ class Task(Model):
         TaskDB.objects.filter(
             id=self.id, user_id=self.user_id).update(remark=remark)
 
-    # 删除任务
-    # def delete(self):
-    #     TaskDB.objects.filter(id=self.id, user_id=self.user_id).delete()
 
     def update(self, data):
         # TODO 验证重复

@@ -25,7 +25,12 @@ Feature: Task
       """
       {
           "name": "下班交报告",
-          "repeat": "Daily",
+          "repeat": {
+            "interval": 1,
+            "intervalType": "Daily",
+            "type": "",
+            "weekdays": []
+          },
           "is_important": true
       }
       """
@@ -36,7 +41,12 @@ Feature: Task
           "name": "晚上有约会",
           "deadline": "今天",
           "notice": "今天", 
-          "repeat": "Daily",
+          "repeat": {
+            "interval": 1,
+            "intervalType": "Daily",
+            "type": "",
+            "weekdays": []
+          },
           "is_important": true
       }
       """

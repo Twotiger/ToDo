@@ -141,7 +141,9 @@
   };
 
   const addTask = async () => {
-
+    if (taskName.value === ''){
+      return
+    }
     let noticeValue = "";
     let deadlineValue = "";
     // let repeatValue = "";

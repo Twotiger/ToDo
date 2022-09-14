@@ -65,7 +65,7 @@ class Task(View):
         return JsonResponse({"data": ""}, status=201)
 
     def patch(self, request):
-        """完成"""
+        """修改属性"""
         json_data = request.json
         op = json_data["op"]
 
@@ -84,17 +84,22 @@ class Task(View):
                 task.task_list_id)
             task_list.uncomplete_task(task)
             return JsonResponse({"data": ""}, status=201)
+
         elif op == "add_my_day":
-            task.add_my_day()
+            task_list = request.god.task_list_repository.get_default()
+            task_list.add_to_my_day(task)
 
         elif op == "delete_my_day":
-            task.delete_my_day()
+            task_list = request.god.task_list_repository.get_default()
+            task_list.delete_my_day(task)
 
         elif op == "add_important":
-            task.add_important()
+            task_list = request.god.task_list_repository.get_default()
+            task_list.add_important(task)
 
         elif op == "delete_important":
-            task.delete_important()
+            task_list = request.god.task_list_repository.get_default()
+            task_list.delete_important(task)
 
         elif op == 'update_remark':
             remark = json_data["remark"]

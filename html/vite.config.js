@@ -40,6 +40,7 @@ export default defineConfig({
 
 			}
 		}
-	}
+	},
+	envPrefix: "ENV_"
 
 })

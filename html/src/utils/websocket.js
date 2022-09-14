@@ -8,12 +8,7 @@ class Websocket {
 
   connect() {
     const user = new User()
-    let websocketURL = ""
-    if (import.meta.env.MODE === 'development') {
-      websocketURL = `ws://${location.hostname}:8765`
-    } else {
-      websocketURL = `wss://${location.hostname}/websocket`
-    }
+    let websocketURL = import.meta.env.ENV_WEBSOCKET_URL
     this.ws = new WebSocket(websocketURL)
     this.ws.onopen = () => {
       this.send({ token: user.getToken() })
